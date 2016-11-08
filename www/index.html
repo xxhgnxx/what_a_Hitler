@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="Wayou">
+        <meta name="description" content="mygame">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>神TM希特勒</title>
+        <link rel="stylesheet" href="main.css">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+
+            <div id="historyMsg"></div>
+
+        <div id="loginWrapper">
+
+            <div id="nickWrapper">
+                <input type="text" placeHolder="nickname" id="nicknameInput"/>
+                <input type="button" value="OK" id="loginBtn"/>
+            </div>
+        </div>
+
+        <div id="playerSelect" class="playerButton">
+            <input name="who" type="button" value="player1" id="player1"/>
+            <input name="who" type="button" value="player2" id="player2"/>
+            <input name="who" type="button" value="player3" id="player3"/>
+            <input name="who" type="button" value="player4" id="player4"/>
+            <input name="who" type="button" value="player5" id="player5"/>
+            <input name="who" type="button" value="player6" id="player6"/>
+            <input name="who" type="button" value="player7" id="player7"/>
+            <input name="who" type="button" value="player8" id="player8"/>
+            <input name="who" type="button" value="player9" id="player9"/>
+            <input name="who" type="button" value="player10" id="player10"/>
+            <input name="pro" type="button" value="prox" id="pro1"/>
+            <input name="pro" type="button" value="prox" id="pro2"/>
+            <input name="pro" type="button" value="prox" id="pro3"/>
+            <input name="vote" type="button" value="同意" id="voteyes"/>
+            <input name="vote" type="button" value="反对" id="voteno"/>
+        </div>
+        <div id="playerList">
+
+            <div id="playerListtable">
+                <table id="playertable" border="1">
+                    <tr>
+                        <td>没有玩家</td>
+                    </tr>
+                </table>
+                <input type="button" value="showList" id="showList"/>
+            </div>
+        </div>
+
+        <input type="button" value="startgame" id="startgame"/>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="scripts/hichat.js"></script>
+        <script src="scripts/myPlayer.js"></script>
+
+    </body>
+</html>
