@@ -1,0 +1,185 @@
+html, body {
+    margin: 0;
+    background-color: #efefef;
+    font-family: sans-serif;
+}
+.wrapper {
+    width: 750px;
+    height: 50px;
+    padding: 5px;
+    margin: 0 auto;
+    background-color: #ddd;
+}
+
+#playerSelect {
+    width: 540px;
+}
+
+.name {
+    width: 100%;
+    font-size:30px
+}
+
+
+
+.controls {
+    position: relative;
+    height: 100px;
+    margin: 5px 0;
+}
+
+
+.sysMsg {
+    float: right;
+    width: 210px;
+    height: 300px;
+    padding: 2px;
+    background-color: #C4BCBC;
+
+
+}
+
+.gameMsg {
+    margin-right;
+    margin-right: 215px;
+    height: 300px;
+    padding: 2px;
+    background-color: #A4B3DA;
+
+}
+
+#log {
+
+    width: 750px;
+    height: 300px;
+    color: #fff;
+    /*padding-top: 200px;*/
+    background-color: #D4CFA9;
+}
+
+
+#playerList {
+    overflow: auto;
+    /*float:left;*/
+    width: 300px;
+    height: 200px;
+    padding: 2px;
+    background-color: #ddd;
+}
+
+.timespan {
+    color: #ddd;
+}
+
+.items {
+    height: 30px;
+}
+
+#colorStyle {
+    width: 50px;
+    padding: 0;
+    border: none;
+}
+
+
+/*custom the file input*/
+
+.imageLable {
+    position: relative;
+}
+
+#sendImage {
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    width: 52px;
+    opacity: 0;
+}
+
+
+/*end custom file input*/
+
+#messageInput {
+    float: left;
+    width: 440px;
+    max-width: 440px;
+    height: 90px;
+    max-height: 90px;
+}
+
+#startgame {
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+#joingame {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+
+#emojiWrapper {
+    position: absolute;
+    bottom: 105px;
+    display: none;
+    width: 500px;
+    background-color: #aaa;
+    box-shadow: 0 0 10px #555;
+}
+
+#emojiWrapper img {
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    padding: 2px;
+}
+
+#emojiWrapper img:hover {
+    background-color: blue;
+}
+
+.emoji {
+    display: inline;
+}
+
+footer {
+    text-align: center;
+}
+
+
+
+#loginWrapper {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(5, 5, 5, .9);
+    text-align: center;
+    color: #fff;
+    padding-top: 200px;
+}
+
+
+#nickWrapper {
+    display: none;
+}
+
+.playerButton input {
+    display: none;
+    width: 100px;
+    height: 40px;
+}
+
+#voteyes {
+    width: 200px;
+    height: 80px;
+    font-size:50px
+}
+
+#voteno {
+    width: 200px;
+    height: 80px;
+    font-size:50px
+}

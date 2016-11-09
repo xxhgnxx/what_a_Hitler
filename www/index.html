@@ -8,15 +8,61 @@
         <meta name="description" content="mygame">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>神TM希特勒</title>
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="mainnew.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
     </head>
 
     <body>
-      <div id="log">
-        <div id="historyMsg"></div>
-        <div id="playerList">
+
+        <!-- <div id="log">
+
+
+
+        </div> -->
+
+        <div class="wrapper">
+            <div class="name" id="name">
+                神TM希特勒
+            </div>
+            <div class="sysMsg" id="sysMsg">sysMsg</div>
+            <div class="gameMsg" id="gameMsg">gameMsg</div>
+            <div class="controls">
+
+                <div class="msgPop" id="msgPop">如果您想加入游戏，请找个座位坐下</div>
+                <div id="playerSelect" class="playerButton">
+                    <input name="who" type="button" value="player1" id="player1"/>
+                    <input name="who" type="button" value="player2" id="player2"/>
+                    <input name="who" type="button" value="player3" id="player3"/>
+                    <input name="who" type="button" value="player4" id="player4"/>
+                    <input name="who" type="button" value="player5" id="player5"/>
+                    <input name="who" type="button" value="player6" id="player6"/>
+                    <input name="who" type="button" value="player7" id="player7"/>
+                    <input name="who" type="button" value="player8" id="player8"/>
+                    <input name="who" type="button" value="player9" id="player9"/>
+                    <input name="who" type="button" value="player10" id="player10"/>
+                    <input name="pro" type="button" value="prox" id="pro1"/>
+                    <input name="pro" type="button" value="prox" id="pro2"/>
+                    <input name="pro" type="button" value="prox" id="pro3"/>
+                    <input name="vote" type="button" value="同意" id="voteyes"/>
+                    <input name="vote" type="button" value="反对" id="voteno"/>
+                </div>
+                <input type="button" value="找个座位坐下" id="joingame"/>
+                <input type="button" value="开始游戏" id="startgame"/>
+
+                <div id="emojiWrapper"></div>
+            </div>
+
+        </div>
+
+        <div id="loginWrapper">
+            <div id="nickWrapper">
+                <input type="text" placeHolder="nickname" id="nicknameInput"/>
+                <input type="button" value="进入房间" id="loginBtn"/>
+            </div>
+        </div>
+
+        <!-- <div id="playerList">
             <div id="playerListtable">
                 <table id="playertable" border="1">
                     <tr>
@@ -25,36 +71,10 @@
                 </table>
                 <input type="button" value="showList" id="showList"/>
             </div>
-        </div>
-        </div>
-        <div id="loginWrapper">
-            <div id="nickWrapper">
-                <input type="text" placeHolder="nickname" id="nicknameInput"/>
-                <input type="button" value="无密码登陆" id="loginBtn"/>
-            </div>
-        </div>
-        <div id="playerSelect" class="playerButton">
-            <input name="who" type="button" value="player1" id="player1"/>
-            <input name="who" type="button" value="player2" id="player2"/>
-            <input name="who" type="button" value="player3" id="player3"/>
-            <input name="who" type="button" value="player4" id="player4"/>
-            <input name="who" type="button" value="player5" id="player5"/>
-            <input name="who" type="button" value="player6" id="player6"/>
-            <input name="who" type="button" value="player7" id="player7"/>
-            <input name="who" type="button" value="player8" id="player8"/>
-            <input name="who" type="button" value="player9" id="player9"/>
-            <input name="who" type="button" value="player10" id="player10"/>
-            <input name="pro" type="button" value="prox" id="pro1"/>
-            <input name="pro" type="button" value="prox" id="pro2"/>
-            <input name="pro" type="button" value="prox" id="pro3"/>
-            <input name="vote" type="button" value="同意" id="voteyes"/>
-            <input name="vote" type="button" value="反对" id="voteno"/>
-        </div>
-
-        <input type="button" value="开始游戏" id="startgame"/>
+        </div> -->
         <script src="/socket.io/socket.io.js"></script>
-        <script src="scripts/hichat.js"></script>
-        <script src="scripts/myPlayer.js"></script>
+        <!-- <script src="scripts/hichat.js"></script> -->
+        <script src="scripts/Player.js"></script>
     </body>
 
 </html>
