@@ -58,11 +58,17 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 }, false);
 
 //登陆成功
-socket.on('loginSuccess', function() {
+socket.on('loginSuccess', function(msg) {
     document.title =document.getElementById('nicknameInput').value+ '送希特勒上天';
     document.getElementById('loginWrapper').style.display = 'none';
     document.getElementById('name').innerHTML=socketName+' 送希特勒上天-神TM希特勒';;
     // document.getElementById('messageInput').focus();
+    if (msg) {
+      document.getElementById('name').innerHTML=socketName+' 旁观送希特勒上天-神TM希特勒';;
+      document.title =document.getElementById('nicknameInput').value+ '旁观希特勒上天';
+      document.getElementById('controls').style.display = 'none';
+      popMsgToHistory(msg,"msgPop");
+    }
 });
 
 // 找个座位坐下，加入游戏

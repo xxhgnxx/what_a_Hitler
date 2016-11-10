@@ -30,6 +30,7 @@ html, body {
 
 
 .sysMsg {
+    overflow: auto;
     float: right;
     width: 210px;
     height: 300px;
@@ -40,6 +41,7 @@ html, body {
 }
 
 .gameMsg {
+    overflow: auto;
     margin-right;
     margin-right: 215px;
     height: 300px;
