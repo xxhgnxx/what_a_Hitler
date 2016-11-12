@@ -185,3 +185,11 @@ footer {
     height: 80px;
     font-size:50px
 }
+
+
+#allVoteDown {
+    display: none;
+    width: 200px;
+    height: 80px;
+    font-size:15px
+}

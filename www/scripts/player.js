@@ -135,8 +135,42 @@ socket.on('choosePro', function(list, msg) {
 			};
 		}.bind(undefined, list[x]);
 	};
+	if (msg=="总理先生，这是本次的提案，请可以提出否决全部提案的请求") {
+		document.getElementById('allVoteDown').style.display = 'inline';
+
+	}
+	if (msg=="总统先生，您的总理提出了否决全部提案的请求，您是否同意？") {
+		document.getElementById('yesAllVoteDown').style.display = 'inline';
+		document.getElementById('noAllVoteDown').style.display = 'inline';
+	}
 	popMsgToHistory(msg, "msgPop");
 });
+
+//否决全部提案流程
+socket.on('AllVoteDown', function(msg) {
+
+	if (msg=="总统反对了您的提议，请从现有的法案中选择一张否决") {
+		document.getElementById('pro1').style.display = 'inline';
+		document.getElementById('pro2').style.display = 'inline';
+
+	}
+	if (msg=="总统先生，您的总理提出了否决全部提案的请求，您是否同意？") {
+		document.getElementById('yesAllVoteDown').style.display = 'inline';
+		document.getElementById('noAllVoteDown').style.display = 'inline';
+	}
+	if (msg=="同意了否决全部方案，本次方案全部否决，全部提案都被否决，同时本届政府解散") {
+
+	}
+
+
+
+
+	popMsgToHistory(msg, "msgPop");
+});
+
+
+
+
 //调查身份动作
 socket.on('invPlayer', function(myplayerList) {
 	console.log("接到invPlayer通知");
@@ -205,6 +239,28 @@ document.getElementById('voteno').addEventListener('click', function() {
 		socket.emit('playerVote', socketName, "反对");
 	}, false)
 	// 开始游戏
+//全部否决按钮
+	document.getElementById('allVoteDown').addEventListener('click', function() {
+			document.getElementById('allVoteDown').style.display = 'none';
+			document.getElementById('pro1').style.display = 'none';
+			document.getElementById('pro2').style.display = 'none';
+			document.getElementById('pro3').style.display = 'none';
+			socket.emit('proSelect',"all");
+		}, false)
+		document.getElementById('noAllVoteDown').addEventListener('click', function() {
+			document.getElementById('yesAllVoteDown').style.display = 'none';
+			document.getElementById('noAllVoteDown').style.display = 'none';
+			socket.emit('proSelect', "all", "反对");
+		}, false)
+		document.getElementById('yesAllVoteDown').addEventListener('click', function() {
+				document.getElementById('yesAllVoteDown').style.display = 'none';
+				document.getElementById('noAllVoteDown').style.display = 'none';
+				socket.emit('proSelect', "all", "同意");
+			}, false)
+
+
+
+		// 开始游戏
 document.getElementById('startgame').addEventListener('click', function() {
 	socket.emit('startgame', socketName);
 }, false);

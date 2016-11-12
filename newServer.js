@@ -4,6 +4,8 @@ var express = require('express'),
 	io = require('socket.io').listen(server);
 app.use('/', express.static(__dirname + '/www'));
 server.listen(80);
+
+
 var socketlist = []; //用户链接列表
 //socket部分，响应事件
 io.on('connection', function(socket) {
@@ -68,6 +70,7 @@ io.on('connection', function(socket) {
 			//通知所有人
 		sthToDo(user, "msgSystem", msg, "gameMsg");
 		//发出投票请求
+		sthToDo(gamePlayer, "msgSystem", socket.name+"挑选了"+player.name+"和他组建政府，请投出您神圣的一票", "msgPop");
 		sthToDo(gamePlayer, "vote");
 	});
 	//响应投票结果
@@ -101,26 +104,68 @@ io.on('connection', function(socket) {
 	});
 	//响应选择法案
 	socket.on('proSelect', function(proDiscard, list) {
-		console.log("待选牌堆" + list.length + "张");
-		if(list.length == 3) {
-			console.log(socket.name + "选择否决了" + proDiscard);
-			list.splice(list.indexOf(proDiscard), 1); //从待选牌堆删除该法案
-			console.log("待选牌堆" + list);
-			msg = "总统" + socket.name + "选择否决了一张法案，等待总理选择法案"
-				//通知所有人
-			sthToDo(user, "msgSystem", msg, "gameMsg");
-			//发出投票请求
-			findPro(list);
-		} else {
-			console.log(socket.name + "选择否决了" + proDiscard);
-			list.splice(list.indexOf(proDiscard), 1); //从待选牌堆删除该法案
-			console.log("待选牌堆" + list);
-			msg = "总理" + socket.name + "选择否决了一张法案，法案生效"
-				//通知所有人
-			sthToDo(user, "msgSystem", msg, "gameMsg");
-			//发出投票请求
-			proEff(list[0]) //法案生效
-		}
+
+
+if (proDiscard=="all") {
+//否决全部   流程
+if (list=="同意" || list=="反对"  ) {
+	//总统是否同意
+if (list=="同意") {
+	//总统同意
+socketlist[prm.name].emit('AllVoteDown', "总统同意了否决全部方案，全部提案都被否决，同时本届政府解散");
+//执行政府组建失败流程
+msg = "总统" + pre.name + "和总理" + prm.name + "决定废弃掉本届政府"
+	//通知所有人
+sthToDo(user, "msgSystem", msg, "gameMsg");
+failSystem()
+} else {
+	//总统反对
+socketlist[prm.name].emit('AllVoteDown', "总统反对了您的提议，请从现有的法案中选择一张否决");
+
+}
+
+
+} else {
+//总理提出否决全部
+socketlist[pre.name].emit('AllVoteDown', "总统先生，您的总理提出了否决全部提案的请求，您是否同意？");
+
+}
+
+
+} else {
+
+	console.log("待选牌堆" + list.length + "张");
+	if(list.length == 3) {
+		console.log(socket.name + "选择否决了" + proDiscard);
+		list.splice(list.indexOf(proDiscard), 1); //从待选牌堆删除该法案
+		console.log("待选牌堆" + list);
+		msg = "总统" + socket.name + "选择否决了一张法案，等待总理选择法案"
+			//通知所有人
+		sthToDo(user, "msgSystem", msg, "gameMsg");
+		//发出投票请求
+		findPro(list);
+	} else {
+		console.log(socket.name + "选择否决了" + proDiscard);
+		list.splice(list.indexOf(proDiscard), 1); //从待选牌堆删除该法案
+		console.log("待选牌堆" + list);
+		msg = "总理" + socket.name + "选择否决了一张法案，法案生效"
+			//通知所有人
+		sthToDo(user, "msgSystem", msg, "gameMsg");
+		//发出投票请求
+		proEff(list[0]) //法案生效
+	}
+
+
+
+}
+
+
+
+
+
+
+
+
 	});
 	//响应技能：身份调查
 	socket.on('invSelect', function(player) {
@@ -261,6 +306,7 @@ function Shuffle() {
 //选总统，一轮结束后继续游戏的象征
 function selectPre(player) {
 	// if (pre) {pre.canbeselect="true";};
+	sthToDo(gamePlayer, "msgSystem", "总统正在决定谁来做他的总理，请稍候....", "msgPop");
 	pre = player;
 	if(gamePlayer[gamePlayer.indexOf(player) + 1]) {
 		prenext = gamePlayer[gamePlayer.indexOf(player) + 1];
@@ -295,6 +341,7 @@ function selectPrm(gamePlayer, pre) {
 }
 //选法案，list为空则为总统，list有内容则为总理
 function findPro(list) {
+	sthToDo(gamePlayer, "msgSystem", "政府执行提案阶段，请等待总统和总理选择提案", "msgPop");
 	if(!list) {
 		console.log("总统选提案");
 		sthToDo(user, "msgSystem", "等待总统选择提案", "gameMsg");
@@ -313,10 +360,22 @@ function findPro(list) {
 		console.log("待选法案堆" + proTmp);
 		socketlist[pre.name].emit('choosePro', proTmp, "总统先生，这是本次的三份提案，请选择您要否决掉的一份");
 	} else {
-		console.log("总理选提案");
-		sthToDo(user, "msgSystem", "等待总理选择提案", "gameMsg");
-		console.log(prm);
-		socketlist[prm.name].emit('choosePro', list, "总理先生，这是本次的两份提案，请选择您要否决掉的一份");
+
+
+if (proEffRed>=1) {
+console.log("总理选提案，可否决");
+sthToDo(user, "msgSystem", "等待总理思考，选择提案", "gameMsg");
+socketlist[prm.name].emit('choosePro', list, "总理先生，这是本次的提案，请可以提出否决全部提案的请求");
+} else {
+	console.log("总理选提案");
+	sthToDo(user, "msgSystem", "等待总理选择提案", "gameMsg");
+	// console.log(prm);
+	socketlist[prm.name].emit('choosePro', list, "总理先生，这是本次的两份提案，请选择您要否决掉的一份");
+}
+
+
+
+
 	}
 }
 //法案生效,pro为法案编号，t为空时，为正常政府流程，否则强制提案流程
@@ -410,8 +469,7 @@ function dealCard(gamePlayer) {
 	};
 };
 // 通知玩家游戏开始
-function
-broadcastTo() {
+function broadcastTo() {
 	console.log("通知玩家");
 	gamePlayer.filter(function(t) {
 		if(t.role == "hitler") {
@@ -537,6 +595,7 @@ function failSystem() {
 }
 //游戏结束，获胜方wingroup，获胜原因reason
 function gameOver(wingroup, reason) {
+	sthToDo(gamePlayer, "msgSystem", "游戏结束", "msgPop");
 	var msg = reason + wingroup
 	sthToDo(user, "msgSystem", msg, "gameMsg");
 }
