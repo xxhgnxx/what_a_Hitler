@@ -16,3 +16,6 @@ node newServer.js
 typescript
 nodeJS+socketIO+exprees+angular2+bootstrap
 目标！一个真正可用可玩的漂亮的 揭秘希特勒
+
+#来个照片
+<img src="">
